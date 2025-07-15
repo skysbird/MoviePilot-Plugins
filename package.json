@@ -850,5 +850,15 @@
         "author": "nnlegenda",
         "level": 1,
         "v2": true
+    },
+    "DingdingMsgKey": {
+        "name": "钉钉机器人关键字",
+        "description": "支持使用钉钉机器人发送消息通知。",
+        "labels": "消息通知,钉钉机器人",
+        "version": "1.0",
+        "icon": "Dingding_A.png",
+        "author": "skysbird",
+        "level": 1,
+        "v2": true
     }
 }
