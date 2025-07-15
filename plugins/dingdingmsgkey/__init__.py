@@ -13,7 +13,7 @@ from typing import Any, List, Dict, Tuple
 from app.log import logger
 
 
-class DingdingMsgKey(_PluginBase):
+class DingdingMsg(_PluginBase):
     # 插件名称
     plugin_name = "钉钉机器人关键字"
     # 插件描述

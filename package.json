@@ -841,7 +841,7 @@
             "v1.0": "同步极影视在看/已看状态到豆瓣"
         }
     },
-    "DingdingMsgKey": {
+    "DingdingMsg": {
         "name": "钉钉机器人关键字",
         "description": "支持使用钉钉机器人发送消息通知。",
         "labels": "消息通知,钉钉机器人",
