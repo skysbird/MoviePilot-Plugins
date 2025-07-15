@@ -38,6 +38,7 @@ class DingdingMsg(_PluginBase):
     _token = None
     _secret = None
     _msgtypes = []
+    _keywords = []
 
     def init_plugin(self, config: dict = None):
         if config:
@@ -45,6 +46,9 @@ class DingdingMsg(_PluginBase):
             self._token = config.get("token")
             self._secret = config.get("secret")
             self._msgtypes = config.get("msgtypes") or []
+            keywords_str = config.get("keywords", "")
+            # 以逗号、空格分隔，去除首尾空格
+            self._keywords = [k.strip() for k in re.split(r",|\s", keywords_str) if k.strip()]
 
     def get_state(self) -> bool:
         return self._enabled and (True if self._token else False) and (True if self._secret else False)
@@ -157,12 +161,34 @@ class DingdingMsg(_PluginBase):
                             }
                         ]
                     },
+                    {
+                        'component': 'VRow',
+                        'content': [
+                            {
+                                'component': 'VCol',
+                                'props': {
+                                    'cols': 12
+                                },
+                                'content': [
+                                    {
+                                        'component': 'VTextField',
+                                        'props': {
+                                            'model': 'keywords',
+                                            'label': '关键字过滤（多个用逗号或空格分隔）',
+                                            'placeholder': '如：下载 完成 失败',
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
                 ]
             }
         ], {
             "enabled": False,
             'token': '',
-            'msgtypes': []
+            'msgtypes': [],
+            'keywords': ''
         }
 
     def get_page(self) -> List[dict]:
@@ -196,6 +222,13 @@ class DingdingMsg(_PluginBase):
         if not title and not text:
             logger.warn("标题和内容不能同时为空")
             return
+
+        # 关键字过滤
+        if self._keywords:
+            title_str = title or ""
+            if not any(kw.lower() in title_str.lower() for kw in self._keywords):
+                logger.info(f"钉钉机器人消息未发送，标题未包含关键字：{self._keywords}")
+                return
 
         if (msg_type and self._msgtypes
                 and msg_type.name not in self._msgtypes):
