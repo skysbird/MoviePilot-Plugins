@@ -15,19 +15,19 @@ from app.log import logger
 
 class DingdingMsg(_PluginBase):
     # 插件名称
-    plugin_name = "钉钉机器人"
+    plugin_name = "钉钉机器人关键字"
     # 插件描述
     plugin_desc = "支持使用钉钉机器人发送消息通知。"
     # 插件图标
     plugin_icon = "Dingding_A.png"
     # 插件版本
-    plugin_version = "1.12"
+    plugin_version = "1.0"
     # 插件作者
-    plugin_author = "nnlegenda"
+    plugin_author = "skysbird"
     # 作者主页
-    author_url = "https://github.com/nnlegenda"
+    author_url = "https://github.com/skysbird"
     # 插件配置项ID前缀
-    plugin_config_prefix = "dingdingmsg_"
+    plugin_config_prefix = "dingdingmsgkey_"
     # 加载顺序
     plugin_order = 25
     # 可使用的用户级别
